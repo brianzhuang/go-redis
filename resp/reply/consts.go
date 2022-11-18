@@ -1,60 +1,63 @@
 package reply
 
-type PongReply struct {
+// PongReply is +PONG
+type PongReply struct{}
+
+var pongBytes = []byte("+PONG\r\n")
+
+// ToBytes marshal redis.Reply
+func (r *PongReply) ToBytes() []byte {
+	return pongBytes
 }
 
-var Pongbytes = []byte("+PONG\r\n")
-
-func (p PongReply) ToBytes() []byte {
-	return Pongbytes
-}
-
-func MakePongReply() *PongReply {
-	return &PongReply{}
-}
-
-type OkReply struct {
-}
+// OkReply is +OK
+type OkReply struct{}
 
 var okBytes = []byte("+OK\r\n")
 
-func (O OkReply) ToBytes() []byte {
+// ToBytes marshal redis.Reply
+func (r *OkReply) ToBytes() []byte {
 	return okBytes
 }
 
 var theOkReply = new(OkReply)
 
-func MakeOKReply() *OkReply {
+// MakeOkReply returns a ok reply
+func MakeOkReply() *OkReply {
 	return theOkReply
-}
-
-type NullBulkReply struct {
 }
 
 var nullBulkBytes = []byte("$-1\r\n")
 
-func (n NullBulkReply) ToBytes() []byte {
+// NullBulkReply is empty string
+type NullBulkReply struct{}
+
+// ToBytes marshal redis.Reply
+func (r *NullBulkReply) ToBytes() []byte {
 	return nullBulkBytes
 }
 
+// MakeNullBulkReply creates a new NullBulkReply
 func MakeNullBulkReply() *NullBulkReply {
 	return &NullBulkReply{}
 }
 
 var emptyMultiBulkBytes = []byte("*0\r\n")
 
-type EmptyMultiBulkReply struct {
-}
+// EmptyMultiBulkReply is a empty list
+type EmptyMultiBulkReply struct{}
 
-func (e EmptyMultiBulkReply) ToBytes() []byte {
+// ToBytes marshal redis.Reply
+func (r *EmptyMultiBulkReply) ToBytes() []byte {
 	return emptyMultiBulkBytes
 }
 
-type NoReply struct {
-}
+// NoReply respond nothing, for commands like subscribe
+type NoReply struct{}
 
 var noBytes = []byte("")
 
-func (n NoReply) ToBytes() []byte {
+// ToBytes marshal redis.Reply
+func (r *NoReply) ToBytes() []byte {
 	return noBytes
 }
