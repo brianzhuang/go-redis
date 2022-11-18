@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"go-redis/config"
 	"go-redis/lib/logger"
+	"go-redis/resp/handler"
 	"go-redis/tcp"
 	"os"
 )
-
 
 const configFile string = "redis.conf"
 
@@ -16,16 +16,16 @@ var defaultPorpperties = &config.ServerProperties{
 	Port: 6379,
 }
 
-func fileExists (filename string) bool {
+func fileExists(filename string) bool {
 	info, err := os.Stat(filename)
 	return err == nil && !info.IsDir()
 }
 
 func main() {
 	logger.Setup(&logger.Settings{
-		Path: "logs",
-		Name: "godis",
-		Ext: "log",
+		Path:       "logs",
+		Name:       "godis",
+		Ext:        "log",
 		TimeFormat: "2006-01-02",
 	})
 
@@ -39,8 +39,8 @@ func main() {
 		&tcp.Config{
 			Address: fmt.Sprintf("%s:%d", config.Properties.Bind, config.Properties.Port),
 		},
-		tcp.MakeHandler())
-	if err!= nil {
+		handler.MakeHandler())
+	if err != nil {
 		logger.Error(err)
 	}
 
