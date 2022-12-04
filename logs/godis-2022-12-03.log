@@ -1,0 +1,6 @@
+[ERROR][main.go:44] 2022/12/03 22:38:15 listen tcp: lookup tcp/%d0.0.0.06379: nodename nor servname provided, or not known
+[INFO][server.go:36] 2022/12/03 22:38:58 start listen
+[INFO][server.go:61] 2022/12/03 22:39:31 accepted link
+[INFO][echo.go:48] 2022/12/03 22:40:23 connection close
+[INFO][server.go:45] 2022/12/03 22:40:29 shutting down
+[INFO][echo.go:63] 2022/12/03 22:40:29 handler shutting down
